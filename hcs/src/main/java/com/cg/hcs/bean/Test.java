@@ -1,8 +1,9 @@
 package com.cg.hcs.bean;
 
 public class Test {
-private String testId;
 private String testName;
+private String testId;
+
 public Test(String testId, String testName) {
 	super();
 	this.testId = testId;

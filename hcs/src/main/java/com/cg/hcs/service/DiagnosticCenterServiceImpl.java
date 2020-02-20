@@ -24,16 +24,17 @@ public class DiagnosticCenterServiceImpl implements DiagnosticCenterService,Diag
 	@Override
 	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
 		// TODO Auto-generated method stub
+		boolean flag=false;
 		if(validateUser(user))
 		{
-			diagnosticcenterdao.approveAppointment(user,center,a);
+			flag=diagnosticcenterdao.approveAppointment(user,center,a);
 		}
 		else
 		{
 			throw new AppointmentException("User is not admin");
 		}
 		
-		return true;
+		return flag;
 	}
 
 }

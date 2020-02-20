@@ -1,9 +1,8 @@
 package com.cg.hcs.bean;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
-
+import java.time.LocalDateTime;
 public class Appointment {
 private User user;
 private int appointmentId;

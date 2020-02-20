@@ -3,6 +3,7 @@ package com.cg.hcs.bean;
 import java.util.List;
 
 public class DiagnosticCenter {
+	
 	private String centerId;
 	private String centerName;
 	private List<String> listOfTests;

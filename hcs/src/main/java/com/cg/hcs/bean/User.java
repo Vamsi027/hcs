@@ -7,8 +7,8 @@ private int userId;
 private  List<DiagnosticCenter>centerList;
 private String userPassword;
 private String userName;
-private int contactNumber;
 private String userRole;
+private int contactNumber;
 private String emailId;
 public User(int userId, List<DiagnosticCenter> centerList, String userPassword, String userName, int contactNumber,
 		String userRole, String emailId) {

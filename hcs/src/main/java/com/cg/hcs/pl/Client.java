@@ -49,13 +49,15 @@ public class Client {
 		Appointment a3=new Appointment(user3,3,test,datetime,false);
 		
 		
+		ap1.add(a1);
+		ap1.add(a2);
+		ap1.add(a3);
+		
 		ap.add(a1);
 		ap.add(a3);
 		ap.add(a2);
 		 
-		ap1.add(a1);
-		ap1.add(a2);
-		ap1.add(a3);	
+			
 		
 		ap3.add(a2);
 		ap3.add(a1);

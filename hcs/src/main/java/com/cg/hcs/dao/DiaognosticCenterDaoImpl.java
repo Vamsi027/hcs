@@ -14,8 +14,9 @@ public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
 		// TODO Auto-generated method stub
 		
+		boolean flag=false;
 			List<Appointment> ap=center.getAppointmentList();
-			boolean flag=false;
+			
 			for(Appointment s:ap)
 			{
 				
