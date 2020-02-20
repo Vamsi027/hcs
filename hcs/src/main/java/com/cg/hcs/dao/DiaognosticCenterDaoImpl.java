@@ -1,5 +1,6 @@
 package com.cg.hcs.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.hcs.bean.Appointment;
@@ -9,24 +10,27 @@ import com.cg.hcs.exception.AppointmentException;
 
 public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 
-
 	@Override
-	public boolean approveAppointment(User user) throws AppointmentException {
+	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
 		// TODO Auto-generated method stub
-		List<DiagnosticCenter> l=user.getCenterList();
-		for(DiagnosticCenter dc:l)
-		{
-			List<Appointment> a=dc.getAppointmentList();
-			for(Appointment s:a)
+		
+			List<Appointment> ap=center.getAppointmentList();
+			boolean flag=false;
+			for(Appointment s:ap)
 			{
-				if(s.isApproved()==false)
+				
+				if((s.isApproved()==false)  && (s.getAppointmentId()==a))
+				{
 					s.setApproved(true);
-				else
-					throw new AppointmentException("Appointment already approved");
+					flag=true;
+					break;
+				}
+				
 			}
-			dc.setAppointmentList(a);
-		}
-		user.setCenterList(l);
+			if(flag==false)
+					throw new AppointmentException("Appointment already approved");
+			center.setAppointmentList(ap);
+		
 		
 		return true;
 	}

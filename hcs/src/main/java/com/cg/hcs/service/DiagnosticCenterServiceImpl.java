@@ -3,14 +3,15 @@ package com.cg.hcs.service;
 import com.cg.hcs.bean.DiagnosticCenter;
 import com.cg.hcs.bean.User;
 import com.cg.hcs.dao.DiagnosticCenterDao;
+import com.cg.hcs.dao.DiaognosticCenterDaoImpl;
 import com.cg.hcs.exception.AppointmentException;
 
-public class DiagnosticCenterServiceImpl implements DiagnosticCenterService{
+public class DiagnosticCenterServiceImpl implements DiagnosticCenterService,DiagnosticCenterDao{
 
-	private DiagnosticCenterService diagnosticcenterdao=null;
+	private DiagnosticCenterDao diagnosticcenterdao=null;
 	public DiagnosticCenterServiceImpl()
 	{
-		diagnosticcenterdao=new DiagnosticCenterServiceImpl();
+		diagnosticcenterdao=new DiaognosticCenterDaoImpl();
 	}
 	
 	public boolean validateUser(User user)
@@ -21,11 +22,11 @@ public class DiagnosticCenterServiceImpl implements DiagnosticCenterService{
 			return false;
 	}
 	@Override
-	public boolean approveAppointment(User user) throws AppointmentException {
+	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
 		// TODO Auto-generated method stub
 		if(validateUser(user))
 		{
-			approveAppointment(user);
+			diagnosticcenterdao.approveAppointment(user,center,a);
 		}
 		else
 		{

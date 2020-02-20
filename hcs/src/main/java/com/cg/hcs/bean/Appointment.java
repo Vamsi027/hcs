@@ -1,20 +1,21 @@
 package com.cg.hcs.bean;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Appointment {
 private User user;
 private int appointmentId;
 private Test test;
-private LocalDate datetime;
+private LocalDateTime datetime;
 private boolean approved;
-public Appointment(User user, int appointmentId, Test test, LocalDate datetime, boolean approved) {
+public Appointment(User user, int appointmentId, Test test, LocalDateTime d, boolean approved) {
 	super();
 	this.user = user;
 	this.appointmentId = appointmentId;
 	this.test = test;
-	this.datetime = datetime;
+	this.datetime = d;
 	this.approved = approved;
 }
 
@@ -40,10 +41,10 @@ public Test getTest() {
 public void setTest(Test test) {
 	this.test = test;
 }
-public LocalDate getDatetime() {
+public LocalDateTime getDatetime() {
 	return datetime;
 }
-public void setDatetime(LocalDate datetime) {
+public void setDatetime(LocalDateTime datetime) {
 	this.datetime = datetime;
 }
 public boolean isApproved() {
