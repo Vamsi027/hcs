@@ -23,7 +23,7 @@ public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 				{
 					s.setApproved(true);
 					flag=true;
-					break;
+				   	break;
 				}
 				
 			}
