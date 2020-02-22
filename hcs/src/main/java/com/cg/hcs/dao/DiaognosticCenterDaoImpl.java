@@ -31,6 +31,7 @@ public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 			}
 			if(flag==false)
 					throw new AppointmentException("Appointment already approved");
+			
 			selectedDiagnosticCenter.setAppointmentList(appointments);
 		
 		

@@ -78,12 +78,11 @@ class HcsTest {
 	@Test
 	void testApproveAppointment() throws AppointmentException {
 		
-		
 		boolean flag=daoservice.approveAppointment(user1, center1, 1);
-		boolean flag2=daoservice.approveAppointment(user2, center2, 2);
 		assertEquals(true, flag);
-		assertEquals(true, flag2);
 		
+	}
+	
 		
 	}
 
