@@ -2,5 +2,5 @@ projectKey=com.cg:hcs
 serverUrl=http://localhost:9000
 serverVersion=6.5.0.27846
 dashboardUrl=http://localhost:9000/dashboard/index/com.cg:hcs
-ceTaskId=AXBrP8RRASNnTqU74ZSO
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXBrP8RRASNnTqU74ZSO
+ceTaskId=AXBspxPxqSSMPrVJbFM5
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXBspxPxqSSMPrVJbFM5

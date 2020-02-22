@@ -1,6 +1,11 @@
 package com.cg.hcs.test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,6 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 import com.cg.hcs.bean.Appointment;
 import com.cg.hcs.bean.DiagnosticCenter;
@@ -20,8 +26,12 @@ class HcsTest {
 	DiagnosticCenterService daoservice=null;
 	User user1=null;
 	User user2=null;
+	User user3=null;
 	DiagnosticCenter center1=null;
 	DiagnosticCenter center2=null;
+	DiagnosticCenter center3=null;
+	
+	
 	
 	@BeforeEach
 	void setUp()
@@ -50,8 +60,8 @@ class HcsTest {
 		diagnosticCenters.add(center3);
 		
 		user1=new User(1,diagnosticCenters,"abcd","efgh",857438291,"admin","16211@gmail.com");
-		user2=new User(2,null,"abcde","eefgh",857438291,"admin","16211@gmail.com");
-		User user3=new User(3,null,"abcdef","fefgh",857438291,"customer","16211@gmail.com");
+		user2=new User(2,null,"abcde","eefgh",857438291,"customer","16211@gmail.com");
+		user3=new User(3,null,"abcdef","fefgh",857438291,"customer","16211@gmail.com");
 		
 		LocalDateTime datetime=LocalDateTime.now();
 		
@@ -76,14 +86,24 @@ class HcsTest {
 	}
 	
 	@Test
-	void testApproveAppointment() throws AppointmentException {
-		
+	void test() throws AppointmentException {
 		boolean flag=daoservice.approveAppointment(user1, center1, 1);
 		assertEquals(true, flag);
 		
 	}
+	@Test
+	    public void testUserWithException() throws AppointmentException {
+		 
 	
-		
+			
+         assertThrows(AppointmentException.class,() -> daoservice.approveAppointment(user2, center1, 1));
+       
+
+        }
+		 
+	    }
+
+	
 
 
-}
+
