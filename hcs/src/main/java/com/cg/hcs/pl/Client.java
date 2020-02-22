@@ -82,6 +82,8 @@ public class Client {
 			sc.nextLine();
 			switch(option) {
 			case 1:
+				try
+				{
 				System.out.println("Please Select the Diagnostic Center by id");
 				for(DiagnosticCenter diagnosticcenter:diagnosticCenters)
 				{
@@ -144,6 +146,11 @@ public class Client {
 				}
 				else
 					System.out.println("No appointments left to approve.");
+				}
+				catch(AppointmentException e) {
+					System.err.println(e.getMessage());
+				}
+	
 				break;
 			case 2:
 				loop=false;
