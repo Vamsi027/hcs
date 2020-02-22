@@ -15,24 +15,11 @@ import com.cg.hcs.bean.User;
 import com.cg.hcs.dao.DiaognosticCenterDaoImpl;
 
 class hcsTest {
-	DiaognosticCenterDaoImpl dao=null;
-	Test test=null;
+	
 	
 	@BeforeEach
 	void setUp()
 	{
-		dao=new DiaognosticCenterDaoImpl();
-		User user1=new User(1,diagnosticCenters,"abcd","efgh",857438291,"admin","16211@gmail.com");
-		 test=new Test("1","Blood Sugar");
-		
-		List<Appointment> appointments1=new ArrayList<Appointment>(); 
-		LocalDateTime datetime=LocalDateTime.now();
-		Appointment a1=new Appointment(user1,1,test,datetime,false);
-
-		appointments1.add(a1);
-		appointments1.add(a2);
-		appointments1.add(a3);
-		DiagnosticCenter center1=new DiagnosticCenter("1","Hyderabad",null,appointments1);
 		
 	}
 	
