@@ -19,26 +19,31 @@ public class Client {
 	public static void main(String[] args) throws AppointmentException {
 		// TODO Auto-generated method stub
 		
+
 		DiagnosticCenterService daoservice=new DiagnosticCenterServiceImpl();
 		
 		Test test=new Test();
-		List<DiagnosticCenter> dcl=new ArrayList<DiagnosticCenter>();
+		
+		List<DiagnosticCenter> diagnosticCenters=new ArrayList<DiagnosticCenter>();
+		
 		List<String> tests=new ArrayList<String>();
 		tests.add("Blood sugar");
 		tests.add("Blood pressure");
 		tests.add("Blood group");
-		List<Appointment> ap=new ArrayList<Appointment>(); 
-		List<Appointment> ap1=new ArrayList<Appointment>();
-		List<Appointment> ap3=new ArrayList<Appointment>(); 
-		DiagnosticCenter dc1=new DiagnosticCenter("1","A1",null,ap);
-		DiagnosticCenter dc2=new DiagnosticCenter("2","A2",null,ap1);
-		DiagnosticCenter dc3=new DiagnosticCenter("3","A3",null,ap3);
 		
-		dcl.add(dc1);
-		dcl.add(dc2);
-		dcl.add(dc3);
+		List<Appointment> appointments1=new ArrayList<Appointment>(); 
+		List<Appointment> appointments2=new ArrayList<Appointment>();
+		List<Appointment> appointments3=new ArrayList<Appointment>(); 
 		
-		User user1=new User(1,dcl,"abcd","efgh",857438291,"admin","16211@gmail.com");
+		DiagnosticCenter center1=new DiagnosticCenter("1","Hyderabad",null,appointments1);
+		DiagnosticCenter center2=new DiagnosticCenter("2","Bengaluru",null,appointments2);
+		DiagnosticCenter center3=new DiagnosticCenter("3","Chennai",null,appointments3);
+		
+		diagnosticCenters.add(center1);
+		diagnosticCenters.add(center2);
+		diagnosticCenters.add(center3);
+		
+		User user1=new User(1,diagnosticCenters,"abcd","efgh",857438291,"admin","16211@gmail.com");
 		User user2=new User(2,null,"abcde","eefgh",857438291,"customer","16211@gmail.com");
 		User user3=new User(3,null,"abcdef","fefgh",857438291,"customer","16211@gmail.com");
 		
@@ -49,69 +54,104 @@ public class Client {
 		Appointment a3=new Appointment(user3,3,test,datetime,false);
 		
 		
-		ap1.add(a1);
-		ap1.add(a2);
-		ap1.add(a3);
+		appointments1.add(a1);
+		appointments1.add(a2);
+		appointments1.add(a3);
 		
-		ap.add(a1);
-		ap.add(a3);
-		ap.add(a2);
-		 
+		appointments2.add(a1);
+		appointments2.add(a3);
+		appointments2.add(a2);
+
 			
 		
-		ap3.add(a2);
-		ap3.add(a1);
-		ap3.add(a3);
+		appointments3.add(a2);
+		appointments3.add(a1);
+		appointments3.add(a3);
 		
 				
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Please Select the Diagnostic Center by id");
-		for(DiagnosticCenter dcl1:dcl)
+		
+		boolean loop=true;
+		while(loop)
 		{
-			System.out.println(dcl1.getCenterId()+" "+dcl1.getCenterName());
-		}
-		String centerid=sc.nextLine();
-		
-		boolean flag=false;
-		DiagnosticCenter dupl=null;
-		
-		for(DiagnosticCenter q:dcl)
-		{	
-			dupl=q;
-			if(centerid.equals(q.getCenterId()))
-			{
-				System.out.println("Here is the list of Appointments to be approved.Select an Appointment to approve");
-				for(Appointment a:q.getAppointmentList())
+			System.out.println("Please choose an option:");
+			System.out.println("1.Approve Appointments");
+			System.out.println("2.Exit");
+			
+			int option=sc.nextInt();
+			sc.nextLine();
+			switch(option) {
+			case 1:
+				System.out.println("Please Select the Diagnostic Center by id");
+				for(DiagnosticCenter diagnosticcenter:diagnosticCenters)
 				{
-					System.out.println(a.getAppointmentId()+" "+a.getUser().getUserName());
+					System.out.println(diagnosticcenter.getCenterId()+"."+diagnosticcenter.getCenterName());
 				}
-				flag=true;
-				break;
-			}
-		}
-		if(flag==false)
-			System.out.println("Selected Center id does not exist");
-		int alone=sc.nextInt();
-		for(Appointment apl:dupl.getAppointmentList())
-		{
-			
-			if(alone==apl.getAppointmentId())
-			{
-				if(daoservice.approveAppointment(user1,dupl,alone))
-					System.out.println("Appointment Approved");
+				String selectedcenterid=sc.nextLine();
+		
+				boolean flag=false,internalflag=false;
+				DiagnosticCenter selecteddiagnosticCenter=null;
+		
+				for(DiagnosticCenter diagnosticcenter:diagnosticCenters)
+				{	
+					selecteddiagnosticCenter=diagnosticcenter;
+					if(selectedcenterid.equals(diagnosticcenter.getCenterId()))
+					{
+						
+						System.out.println("Here is the list of Appointments to be approved.Select an Appointment to approve");
+						for(Appointment appointment:diagnosticcenter.getAppointmentList())
+						{
+							if(appointment.isApproved()==false) {
+								System.out.println(appointment.getAppointmentId()+"."+appointment.getUser().getUserName());
+								internalflag=true;
+							}
+						}
+						flag=true;
+						break;
+					}
+				}
+				if(flag==false)
+					System.out.println("Selected Center id does not exist");
+				if(internalflag) {
 					
-			}
-		}
-		System.out.println("Appointments remaining to be approved are:");
-		for(Appointment apl:dupl.getAppointmentList())
-		{
+				
+				int selectedappointmentid=sc.nextInt();
+				
+				boolean flag1=false;
+				for(Appointment appointment:selecteddiagnosticCenter.getAppointmentList())
+				{
+					if(selectedappointmentid==appointment.getAppointmentId())
+					{
+						if(daoservice.approveAppointment(user1,selecteddiagnosticCenter,selectedappointmentid)) {
+							System.out.println("Appointment Approved");
+						}
+						flag1=true;
+						break;
+					}
+				}
+				if(flag1==false)
+					System.out.println("Selected Appointment id does not exist");
+		
+				System.out.println("Appointments remaining to be approved are:");
+				for(Appointment selectedAppointment:selecteddiagnosticCenter.getAppointmentList())
+				{
 			
-			if(apl.isApproved()==false)
-			{
-					System.out.println(apl.getAppointmentId()+" "+apl.getUser().getUserName());
+					if(selectedAppointment.isApproved()==false)
+					{
+						System.out.println(selectedAppointment.getAppointmentId()+"."+selectedAppointment.getUser().getUserName());
+					}
+				}
+				}
+				else
+					System.out.println("No appointments left to approve.");
+				break;
+			case 2:
+				loop=false;
+				break;
+			default:
+				System.out.println("Choose a correct option");
 			}
-		}
-			
+			}
 		
 	}
 

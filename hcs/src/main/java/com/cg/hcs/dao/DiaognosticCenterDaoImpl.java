@@ -11,18 +11,19 @@ import com.cg.hcs.exception.AppointmentException;
 public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 
 	@Override
-	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
+	public boolean approveAppointment(User user,DiagnosticCenter selectedDiagnosticCenter,int selectedappointmentid) throws AppointmentException {
 		// TODO Auto-generated method stub
 		
+
 		boolean flag=false;
-			List<Appointment> ap=center.getAppointmentList();
+			List<Appointment> appointments=selectedDiagnosticCenter.getAppointmentList();
 			
-			for(Appointment s:ap)
+			for(Appointment temporaryappointment:appointments)
 			{
 				
-				if((s.isApproved()==false)  && (s.getAppointmentId()==a))
+				if((temporaryappointment.isApproved()==false)  && (temporaryappointment.getAppointmentId()==selectedappointmentid))
 				{
-					s.setApproved(true);
+					temporaryappointment.setApproved(true);
 					flag=true;
 				   	break;
 				}
@@ -30,7 +31,7 @@ public class DiaognosticCenterDaoImpl implements DiagnosticCenterDao{
 			}
 			if(flag==false)
 					throw new AppointmentException("Appointment already approved");
-			center.setAppointmentList(ap);
+			selectedDiagnosticCenter.setAppointmentList(appointments);
 		
 		
 		return true;

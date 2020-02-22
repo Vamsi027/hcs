@@ -22,12 +22,12 @@ public class DiagnosticCenterServiceImpl implements DiagnosticCenterService,Diag
 			return false;
 	}
 	@Override
-	public boolean approveAppointment(User user,DiagnosticCenter center,int a) throws AppointmentException {
+	public boolean approveAppointment(User user,DiagnosticCenter selectedDiagnosticCenter,int selectedappointmentid) throws AppointmentException {
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		if(validateUser(user))
 		{
-			flag=diagnosticcenterdao.approveAppointment(user,center,a);
+			flag=diagnosticcenterdao.approveAppointment(user,selectedDiagnosticCenter,selectedappointmentid);
 		}
 		else
 		{
