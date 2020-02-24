@@ -1,8 +1,8 @@
 package com.cg.hcs.pl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,8 +69,9 @@ public class Client {
 		appointments3.add(a3);
 		
 				
-		Scanner sc=new Scanner(System.in);
-		
+		Scanner scanner=new Scanner(System.in);
+		try
+		{
 		boolean loop=true;
 		while(loop)
 		{
@@ -78,8 +79,8 @@ public class Client {
 			System.out.println("1.Approve Appointments");
 			System.out.println("2.Exit");
 			
-			int option=sc.nextInt();
-			sc.nextLine();
+			int option=scanner.nextInt();
+			scanner.nextLine();
 			switch(option) {
 			case 1:
 				try
@@ -89,7 +90,7 @@ public class Client {
 				{
 					System.out.println(diagnosticcenter.getCenterId()+"."+diagnosticcenter.getCenterName());
 				}
-				String selectedcenterid=sc.nextLine();
+				String selectedcenterid=scanner.nextLine();
 		
 				boolean flag=false,internalflag=false;
 				DiagnosticCenter selecteddiagnosticCenter=null;
@@ -117,7 +118,7 @@ public class Client {
 				if(internalflag) {
 					
 				
-				int selectedappointmentid=sc.nextInt();
+				int selectedappointmentid=scanner.nextInt();
 				
 				boolean flag1=false;
 				for(Appointment appointment:selecteddiagnosticCenter.getAppointmentList())
@@ -159,6 +160,11 @@ public class Client {
 				System.out.println("Choose a correct option");
 			}
 			}
+		}
+		catch(InputMismatchException e)
+		{
+			System.err.println("Input Mismatch");
+		}
 		
 	}
 
