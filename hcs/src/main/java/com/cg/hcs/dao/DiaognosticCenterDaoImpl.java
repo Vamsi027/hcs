@@ -1,6 +1,5 @@
 package com.cg.hcs.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.hcs.bean.Appointment;

@@ -67,8 +67,7 @@ public class Client {
 		appointments3.add(a2);
 		appointments3.add(a1);
 		appointments3.add(a3);
-		
-				
+						
 		Scanner scanner=new Scanner(System.in);
 		try
 		{
@@ -78,13 +77,12 @@ public class Client {
 			System.out.println("Please choose an option:");
 			System.out.println("1.Approve Appointments");
 			System.out.println("2.Exit");
-			
+			System.out.println();
 			int option=scanner.nextInt();
 			scanner.nextLine();
 			switch(option) {
 			case 1:
-				try
-				{
+				
 				System.out.println("Please Select the Diagnostic Center by id");
 				for(DiagnosticCenter diagnosticcenter:diagnosticCenters)
 				{
@@ -94,7 +92,7 @@ public class Client {
 		
 				boolean flag=false,internalflag=false;
 				DiagnosticCenter selecteddiagnosticCenter=null;
-		
+				System.out.println();
 				for(DiagnosticCenter diagnosticcenter:diagnosticCenters)
 				{	
 					selecteddiagnosticCenter=diagnosticcenter;
@@ -115,6 +113,7 @@ public class Client {
 				}
 				if(flag==false)
 					System.out.println("Selected Center id does not exist");
+				System.out.println();
 				if(internalflag) {
 					
 				
@@ -127,6 +126,7 @@ public class Client {
 					{
 						if(daoservice.approveAppointment(user1,selecteddiagnosticCenter,selectedappointmentid)) {
 							System.out.println("Appointment Approved");
+							System.out.println();
 						}
 						flag1=true;
 						break;
@@ -147,10 +147,7 @@ public class Client {
 				}
 				else
 					System.out.println("No appointments left to approve.");
-				}
-				catch(AppointmentException e) {
-					System.err.println(e.getMessage());
-				}
+				
 	
 				break;
 			case 2:
@@ -160,11 +157,16 @@ public class Client {
 				System.out.println("Choose a correct option");
 			}
 			}
-		}
-		catch(InputMismatchException e)
-		{
-			System.err.println("Input Mismatch");
-		}
+		
+			}
+		catch(AppointmentException e)
+			{
+				System.err.println(e.getMessage());
+			}
+			catch(InputMismatchException e)
+			{
+				System.err.println("Input Mismatch");
+			}
 		
 	}
 
